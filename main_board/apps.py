@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class MainboardConfig(AppConfig):
+class MainBoardConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Mainboard'
+    name = 'main_board'

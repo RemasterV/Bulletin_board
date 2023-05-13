@@ -1,0 +1,75 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+   <hr>
+
+       <table>
+
+           <tr>
+
+               <td>{{ post.datecreation }}</td>
+
+               <td>{{ post.title }}</td>
+               <td>{{ 'from' }}</td>
+               <td>{{ post.author }}</td>
+
+           </tr>
+
+           <tr>
+
+               <td>-------------------------</td>
+               <td>-------------------------</td>
+           </tr>
+           <tr>
+
+
+               <td>{{ post.text }}</td>
+
+           </tr>
+       </table>
+
+
+               {% if post.image %}
+                    <a href="{{ post.image.url }}"><img src="{{ post.image.url }}" width="176" height="99"></a>
+               {% endif %}
+
+       <table>
+                   <tr>
+
+               <td><a href="edit">Вы можете отредактировать объявление</a></td>
+
+
+           </tr>
+           <tr>
+
+               <td>-------------------------</td>
+
+           </tr>
+           <tr>
+
+               <td><a href="delete">Вы можете удалить объявление</a></td>
+
+
+           </tr>
+           <tr>
+
+               <td>-------------------------</td>
+
+           </tr>
+           <tr>
+
+               <td><a href="message">Вы можете оставить отклик на объявление</a></td>
+
+
+           </tr>
+{% endblock content %}
+
+
+
+
+
+
+
