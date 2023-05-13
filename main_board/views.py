@@ -2,6 +2,7 @@ from django.views.generic import ListView, DetailView, UpdateView, DeleteView, C
 from .models import Post, Message
 from .forms import PostForm, MessageForm
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class Posts(ListView):
@@ -9,7 +10,7 @@ class Posts(ListView):
     ordering = 'title'
     template_name = 'posts.html'
     context_object_name = 'posts'
-    # paginate_by = 7
+
 
 
 class OnePost(DetailView):
@@ -17,27 +18,29 @@ class OnePost(DetailView):
     template_name = 'post.html'
     context_object_name = 'post'
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, CreateView):
+    raise_exception = True
     form_class = PostForm
     model = Post
     template_name = 'post_create.html'
     success_url = reverse_lazy('main')
 
 
-class PostEdit(UpdateView):
+class PostEdit(LoginRequiredMixin, UpdateView):
     raise_exception = True
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
     success_url = reverse_lazy('main')
 
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin, DeleteView):
     raise_exception = True
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('main')
 
-class MessageCreate(CreateView):
+class MessageCreate(LoginRequiredMixin, CreateView):
+    raise_exception = True
     form_class = MessageForm
     model = Message
     template_name = 'message_create.html'
