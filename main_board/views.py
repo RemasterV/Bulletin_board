@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView, UpdateView, DeleteView, C
 from .models import Post, Message
 from .forms import PostForm, MessageForm
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 class Posts(ListView):
@@ -18,7 +18,8 @@ class OnePost(DetailView):
     template_name = 'post.html'
     context_object_name = 'post'
 
-class PostCreate(LoginRequiredMixin, CreateView):
+class PostCreate(PermissionRequiredMixin, CreateView):
+    permission_required = ('main_board.add_post')
     raise_exception = True
     form_class = PostForm
     model = Post
@@ -26,14 +27,16 @@ class PostCreate(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('main')
 
 
-class PostEdit(LoginRequiredMixin, UpdateView):
+class PostEdit(PermissionRequiredMixin, UpdateView):
+    permission_required = ('main_board.change_post')
     raise_exception = True
     form_class = PostForm
     model = Post
     template_name = 'post_edit.html'
     success_url = reverse_lazy('main')
 
-class PostDelete(LoginRequiredMixin, DeleteView):
+class PostDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = ('main_board.delete_post')
     raise_exception = True
     model = Post
     template_name = 'post_delete.html'
